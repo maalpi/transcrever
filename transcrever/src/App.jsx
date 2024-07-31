@@ -2,47 +2,47 @@ import React, { useState, useEffect } from 'react';
 
 function App() {
   const [transcription, setTranscription] = useState('');
-  const [isTranscribing, setIsTranscribing] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleTranscribeClick = () => {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      const activeTab = tabs[0];
+      chrome.scripting.executeScript({
+        target: { tabId: activeTab.id },
+        function: () => {
+          const videoUrl = window.location.href;
+          chrome.runtime.sendMessage({ action: 'transcribe', videoUrl: videoUrl });
+        }
+      });
+    });
+  };
 
   useEffect(() => {
-    chrome.storage.local.get(['transcription'], (result) => {
-      if (result.transcription) {
-        setTranscription(result.transcription);
+    const messageListener = (message) => {
+      if (message.action === 'transcriptionResult') {
+        setTranscription(message.transcription);
+        setLoading(false);
       }
-    });
+    };
+
+    chrome.runtime.onMessage.addListener(messageListener);
+
+    return () => {
+      chrome.runtime.onMessage.removeListener(messageListener);
+    };
   }, []);
-
-  const startTranscription = () => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (tabs.length > 0) {
-        chrome.tabs.sendMessage(tabs[0].id, { action: 'start_transcription' });
-        setIsTranscribing(true);
-      } else {
-        console.error('No active tabs found.');
-      }
-    });
-  };
-
-  const stopTranscription = () => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (tabs.length > 0) {
-        chrome.tabs.sendMessage(tabs[0].id, { action: 'stop_transcription' });
-        setIsTranscribing(false);
-      } else {
-        console.error('No active tabs found.');
-      }
-    });
-  };
 
   return (
     <div>
-      <h1>Video Transcription</h1>
-      <button onClick={startTranscription} disabled={isTranscribing}>Start Transcription</button>
-      <button onClick={stopTranscription} disabled={!isTranscribing}>Stop Transcription</button>
-      <div>
-        <h2>Transcription:</h2>
-        <p>{transcription}</p>
-      </div>
+      <h1>YouTube Transcriber</h1>
+      <button onClick={handleTranscribeClick}>Transcribe Video</button>
+      {loading && <p>Transcribing...</p>}
+      {transcription && (
+        <div>
+          <h2>Transcription:</h2>
+          <p>{transcription}</p>
+        </div>
+      )}
     </div>
   );
 }

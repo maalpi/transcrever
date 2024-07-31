@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        popup: 'public/popup.html', // Arquivo HTML do popup
+        main: 'index.html', // Arquivo HTML do popup
         background: 'src/background.js',
         content: 'src/content.js'
       },

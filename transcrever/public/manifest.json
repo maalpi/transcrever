@@ -1,24 +1,19 @@
 {
-    "manifest_version": 3,
-    "name": "Video Transcription Extension",
-    "version": "1.0",
-    "description": "Transcribe YouTube videos in real-time",
-    "permissions": [
-      "activeTab",
-      "scripting",
-      "storage"
-    ],
-    "background": {
-      "service_worker": "background.js"
-    },
-    "content_scripts": [
-      {
-        "matches": ["*://*.youtube.com/*"],
-        "js": ["content.js"]
-      }
-    ],
-    "action": {
-      "default_popup": "popup.html"
+  "manifest_version": 3,
+  "name": "YouTube Transcriber",
+  "version": "1.0",
+  "description": "Transcreva vídeos do YouTube em tempo real",
+  "permissions": ["tabs", "activeTab", "scripting"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["content.js"]
     }
-  }
-  
+  ]
+}
