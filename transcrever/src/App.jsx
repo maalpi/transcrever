@@ -51,11 +51,10 @@ function App() {
       <Title className='sub'>Transcriber</Title>
       <ContainerFromText>
         <ButtonCircle onClick={handleTranscribeClick}><p>T</p></ButtonCircle>
-        {loading && <p>Transcribing...</p>}
+        { loading ? <h2>Escrevendo...</h2> : <h2>transcreva</h2>}
         {error && <p style={{ color: 'red' }}>{error}</p>}
         {transcription && (
           <ContainerText>
-            <h2>Transcription:</h2>
             <p>{transcription}</p>
           </ContainerText>
         )}

@@ -11,26 +11,49 @@ export const Container = styled.div`
 `
 
 export const ContainerFromText = styled.div`
-    background-color: #121212;
+    background-color: #2e2e2e;
     height: 65vh;
     width: 100%;
     display: flex; /* Added to help center content */
     align-items: flex-start; /* Align children to the start */
     justify-content: center; /* Center children horizontally */
     position: relative; /* Added to allow positioning the button */
+    flex-direction: column;
+    h2 {
+        color: #f06;
+        font-family: "Silkscreen", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 1.8rem;
+        margin-top: -65%;
+        margin-left: 15%;
+        position: fixed;
+    }
 `
 
 export const ContainerText = styled.div`
     color: #fff;
-    height: 55vh;
+    height: 52vh;
     width: 100%;
+    margin-top: 30%;
     text-align: left;
     overflow:auto; 
+    background-color: #2e2e2e;
+    border-radius: 0px;
+    scrollbar-width: thin;  
+    scrollbar-color: #9e9e9e #3a3f50;
+    color: #efefec;
+
 
     h2 {
+        font-family: "Roboto Mono", monospace;
+        font-optical-sizing: auto;
         padding: 0.8rem;
     }
-    p{
+    p{  
+        margin-block-start: 0.2em;
+        font-family: "Roboto Mono", monospace;
+        font-optical-sizing: auto;
         padding: 0.8rem;
         font-size: 1.2rem;
     }
@@ -40,7 +63,7 @@ export const ButtonCircle = styled.button`
     position: fixed;
     width: 72px;
     height: 72px;
-    background: red;
+    background: #f06;
     border: 2px solid #fff;
     border-radius: 70px;
     cursor: pointer;
@@ -71,8 +94,9 @@ export const ButtonCircle = styled.button`
 export const Title = styled.h1`
     font-size: 2.4rem;
     text-align: center;
-    font-weight: 700;
-    font-family: "Monoton", "Text Me One", sans-serif;
+    font-family: "Silkscreen", sans-serif;
+    font-weight: 400;
+    font-style: normal;
     color: #121212;
 
     &.sub{
