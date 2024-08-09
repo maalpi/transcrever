@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Title, ContainerFromText, ContainerText, ButtonCircle } from './styled/styled';
+import { Container, Title, ContainerFromText, ContainerText, ButtonCircle,LoadingDots} from './styled/styled';
 import api from './api';
 function App() {
   const [transcription, setTranscription] = useState('');
@@ -51,7 +51,7 @@ function App() {
       <Title className='sub'>Transcriber</Title>
       <ContainerFromText>
         <ButtonCircle onClick={handleTranscribeClick}><p>T</p></ButtonCircle>
-        { loading ? <h2>Escrevendo...</h2> : <h2>transcreva</h2>}
+        { loading ? <h2>Escrevendo<LoadingDots /></h2> : <h2>transcreva</h2>}
         {error && <p style={{ color: 'red' }}>{error}</p>}
         {transcription && (
           <ContainerText>

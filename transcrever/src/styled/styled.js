@@ -1,4 +1,20 @@
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
+
+const pulse = keyframes`
+    0% {transform: translate(0); opacity: 1; content: "";}
+    33% {transform: translate(5px); opacity: 0.5; content: ".";}
+    66% {transform: translate(-5px); opacity: 0.5; content: "..";}
+    100% {transform: translate(0); opacity: 1; content: "...";}
+`
+
+export const LoadingDots = styled.span`
+    display: inline-block;
+    font-size: 1.8rem;
+    &:after {
+        content: '';
+        animation: ${pulse} 1.2s infinite;
+    }
+`
 
 export const Container = styled.div`
     display: flex;
