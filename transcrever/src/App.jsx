@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Title, ContainerFromText, ContainerText, ButtonCircle } from './styled/styled';
-
+import api from './api';
 function App() {
   const [transcription, setTranscription] = useState('');
   const [loading, setLoading] = useState(false);
@@ -10,12 +10,15 @@ function App() {
     console.log('Transcribe button clicked');
     setLoading(true);
     setError('');
+
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const activeTab = tabs[0];
       chrome.scripting.executeScript({
         target: { tabId: activeTab.id },
         function: () => {
-          chrome.runtime.sendMessage({ action: 'getVideoUrl' });
+          const videoUrl = window.location.href;
+          console.log('Video URL:', videoUrl);
+          chrome.runtime.sendMessage({ action: 'transcribe', videoUrl: videoUrl });
         }
       });
     });
@@ -23,7 +26,7 @@ function App() {
 
   useEffect(() => {
     const messageListener = (message) => {
-      console.log('Message received:', message);
+      console.log('Message received listenApp:', message.action);
       if (message.action === 'transcriptionResult') {
         if (message.error) {
           setError(message.error);
@@ -40,6 +43,7 @@ function App() {
       chrome.runtime.onMessage.removeListener(messageListener);
     };
   }, []);
+  
 
   return (
     <Container>

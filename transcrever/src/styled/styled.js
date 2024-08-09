@@ -32,20 +32,21 @@ export const ContainerText = styled.div`
     }
     p{
         padding: 0.8rem;
-        font-size: 1.4rem;
+        font-size: 1.2rem;
     }
 `
 
 export const ButtonCircle = styled.button`
+    position: fixed;
     width: 72px;
     height: 72px;
     background: red;
     border: 2px solid #fff;
     border-radius: 70px;
     cursor: pointer;
-    top: 50%; /* Positioned at the center of the container */
-    left: 50%; /* Centered horizontally */
-    margin-top: -10%;
+    top: 29%; /* Positioned at the center of the container */
+    left: 38%; /* Centered horizontally */
+
     text-align: center;
     p{
         margin-top: -4%;

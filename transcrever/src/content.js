@@ -1,18 +1,16 @@
-// content.js
-function getCurrentVideoUrl() {
-  const videoElement = document.querySelector('video');
-  if (videoElement) {
-    return window.location.href;
-  }
-  return null;
-}
+console.log("Content script carregado.");
 
-// Enviar a URL para o background script
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === 'getVideoUrl') {
-    const videoUrl = getCurrentVideoUrl();
-    if (videoUrl) {
-      chrome.runtime.sendMessage({ action: 'transcribe', videoUrl: videoUrl });
-    }
-  }
-});
+// function getCurrentVideoUrl() {
+//   const videoElement = document.querySelector('video');
+//   const url = window.location.href;
+//   console.log("URL detectada:", url);
+//   if (videoElement) {
+//     return url;
+//   }
+//   return null;
+// }
+
+// const videoUrl = getCurrentVideoUrl();
+// if (videoUrl) {
+//   chrome.runtime.sendMessage({ action: 'transcribe', videoUrl: videoUrl });
+// }

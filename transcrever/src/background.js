@@ -1,19 +1,30 @@
-import api from './api'; // Importando a configuração do Axios
-
 chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+  console.log("Mensagem recebida no background:", message.videoUrl);
   if (message.action === 'transcribe') {
     try {
-      const response = await api.post('/transcribe', { url: message.videoUrl });
+      const response = await fetch('http://localhost:5000/transcribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ url: message.videoUrl })
+      });
 
-      if (response.status === 200) {
-        chrome.tabs.sendMessage(sender.tab.id, {
+      console.log('Resposta da API:', response);
+      const result = await response.json();
+      console.log('result:', result);
+
+      if (response.ok) {
+        console.log('response ok')
+        console.log(sender.tab.id)
+        chrome.runtime.sendMessage({
           action: 'transcriptionResult',
-          transcription: response.data.transcription
+          transcription: result.transcription
         });
       } else {
         chrome.tabs.sendMessage(sender.tab.id, {
           action: 'transcriptionResult',
-          error: response.data.error || 'Unknown error'
+          error: result.error || 'Unknown error'
         });
       }
     } catch (error) {
