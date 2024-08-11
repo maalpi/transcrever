@@ -50,7 +50,7 @@ function App() {
       <Title>YouTube</Title>
       <Title className='sub'>Transcriber</Title>
       <ContainerFromText>
-        <ButtonCircle onClick={handleTranscribeClick}><p>T</p></ButtonCircle>
+        <ButtonCircle onClick={handleTranscribeClick} disabled={loading}><p>T</p></ButtonCircle>
         { loading ? <h2>Escrevendo<LoadingDots /></h2> : <h2>transcreva</h2>}
         {error && <p style={{ color: 'red' }}>{error}</p>}
         {transcription && (

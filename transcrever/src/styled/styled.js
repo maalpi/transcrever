@@ -92,6 +92,13 @@ export const ButtonCircle = styled.button`
         font-size: 2.4rem;
         font-weight: 700;
     }
+    &:disabled,
+    &[disabled]{
+    border: 1px solid #999999;
+    background-color: rgba(255,0,102,.7);
+    color: #666666;
+    cursor: none;
+    }
     /* &:before {
         content: " ";
         position: absolute;
