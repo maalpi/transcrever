@@ -11,6 +11,7 @@ function App() {
     setLoading(true);
     setError('');
 
+    // Consulta a aba ativa e executa um script nela
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const activeTab = tabs[0];
       chrome.scripting.executeScript({
