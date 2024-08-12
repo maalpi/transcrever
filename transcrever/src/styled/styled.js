@@ -95,9 +95,9 @@ export const ButtonCircle = styled.button`
     &:disabled,
     &[disabled]{
     border: 1px solid #999999;
-    background-color: rgba(255,0,102,.7);
-    color: #666666;
-    cursor: none;
+    background-color: rgba(255,0,102,.8);
+    color: rgba(255,255,255,.5);
+    cursor: wait;
     }
     /* &:before {
         content: " ";

@@ -24,6 +24,7 @@ function App() {
     });
   };
 
+  // Escutando a resposta da API para mudar o estado da transcription e mostrar na tela
   useEffect(() => {
     const messageListener = (message) => {
       console.log('Message received listenApp:', message.action);
@@ -36,7 +37,7 @@ function App() {
         setLoading(false);
       }
     };
-
+    
     chrome.runtime.onMessage.addListener(messageListener);
 
     return () => {
