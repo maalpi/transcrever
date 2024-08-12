@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Title, ContainerFromText, ContainerText, ButtonCircle,LoadingDots} from './styled/styled';
-import api from './api';
+
 function App() {
   const [transcription, setTranscription] = useState('');
   const [loading, setLoading] = useState(false);
@@ -37,7 +37,7 @@ function App() {
         setLoading(false);
       }
     };
-    
+
     chrome.runtime.onMessage.addListener(messageListener);
 
     return () => {
